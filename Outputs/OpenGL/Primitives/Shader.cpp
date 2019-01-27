@@ -122,6 +122,7 @@ void Shader::enable_vertex_attribute_with_pointer(const std::string &name, GLint
 		glEnableVertexAttribArray((GLuint)location);
 		glVertexAttribPointer((GLuint)location, size, type, normalised, stride, pointer);
 		glVertexAttribDivisor((GLuint)location, divisor);
+		assert(!glGetError());
 	} else {
 		LOG("Couldn't enable vertex attribute " << name);
 	}
@@ -132,18 +133,21 @@ void Shader::enable_vertex_attribute_with_pointer(const std::string &name, GLint
 void Shader::set_uniform(const std::string &name, GLint value) {
 	enqueue_function([name, value, this] {
 		glUniform1i(location(), value);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLuint value) {
 	enqueue_function([name, value, this] {
 		glUniform1ui(location(), value);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLfloat value) {
 	enqueue_function([name, value, this] {
 		glUniform1f(location(), value);
+		assert(!glGetError());
 	});
 }
 
@@ -151,55 +155,63 @@ void Shader::set_uniform(const std::string &name, GLfloat value) {
 void Shader::set_uniform(const std::string &name, GLint value1, GLint value2) {
 	enqueue_function([name, value1, value2, this] {
 		glUniform2i(location(), value1, value2);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLfloat value1, GLfloat value2) {
 	enqueue_function([name, value1, value2, this] {
-		GLint location = location();
-		glUniform2f(location, value1, value2);
+		glUniform2f(location(), value1, value2);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLuint value1, GLuint value2) {
 	enqueue_function([name, value1, value2, this] {
 		glUniform2ui(location(), value1, value2);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLint value1, GLint value2, GLint value3) {
 	enqueue_function([name, value1, value2, value3, this] {
 		glUniform3i(location(), value1, value2, value3);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLfloat value1, GLfloat value2, GLfloat value3) {
 	enqueue_function([name, value1, value2, value3, this] {
 		glUniform3f(location(), value1, value2, value3);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLuint value1, GLuint value2, GLuint value3) {
 	enqueue_function([name, value1, value2, value3, this] {
 		glUniform3ui(location(), value1, value2, value3);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLint value1, GLint value2, GLint value3, GLint value4) {
 	enqueue_function([name, value1, value2, value3, value4, this] {
 		glUniform4i(location(), value1, value2, value3, value4);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLfloat value1, GLfloat value2, GLfloat value3, GLfloat value4) {
 	enqueue_function([name, value1, value2, value3, value4, this] {
 		glUniform4f(location(), value1, value2, value3, value4);
+		assert(!glGetError());
 	});
 }
 
 void Shader::set_uniform(const std::string &name, GLuint value1, GLuint value2, GLuint value3, GLuint value4) {
 	enqueue_function([name, value1, value2, value3, value4, this] {
 		glUniform4ui(location(), value1, value2, value3, value4);
+		assert(!glGetError());
 	});
 }
 
@@ -214,6 +226,7 @@ void Shader::set_uniform(const std::string &name, GLint size, GLsizei count, con
 			case 3: glUniform3iv(location(), count, values_copy.data());	break;
 			case 4: glUniform4iv(location(), count, values_copy.data());	break;
 		}
+		assert(!glGetError());
 	});
 }
 
@@ -228,6 +241,7 @@ void Shader::set_uniform(const std::string &name, GLint size, GLsizei count, con
 			case 3: glUniform3fv(location(), count, values_copy.data());	break;
 			case 4: glUniform4fv(location(), count, values_copy.data());	break;
 		}
+		assert(!glGetError());
 	});
 }
 
@@ -242,6 +256,7 @@ void Shader::set_uniform(const std::string &name, GLint size, GLsizei count, con
 			case 3: glUniform3uiv(location(), count, values_copy.data());	break;
 			case 4: glUniform4uiv(location(), count, values_copy.data());	break;
 		}
+		assert(!glGetError());
 	});
 }
 
@@ -260,6 +275,7 @@ void Shader::set_uniform_matrix(const std::string &name, GLint size, GLsizei cou
 			case 3: glUniformMatrix3fv(location(), count, glTranspose, values_copy.data());	break;
 			case 4: glUniformMatrix4fv(location(), count, glTranspose, values_copy.data());	break;
 		}
+		assert(!glGetError());
 	});
 }
 
