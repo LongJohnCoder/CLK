@@ -8,6 +8,8 @@
 
 #include "Shader.hpp"
 
+#include <cassert>
+
 #include "../../Log.hpp"
 
 using namespace Outputs::Display::OpenGL;
