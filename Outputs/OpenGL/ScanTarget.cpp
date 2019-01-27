@@ -107,6 +107,7 @@ void ScanTarget::set_modals(Modals modals) {
 	// Don't change the modals while drawing is ongoing; a previous set might be
 	// in the process of being established.
 	while(is_drawing_.test_and_set());
+	modals.display_type = DisplayType::CompositeMonochrome;
 	modals_ = modals;
 	modals_are_dirty_ = true;
 	is_drawing_.clear();
