@@ -309,12 +309,8 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 	vertex_shader += "}";
 
 	// Compose a fragment shader.
-	fragment_shader +=
-		"void main(void) {"
-			"fragColour = vec4(textureLod(textureName, textureCoordinate, 0).rrr, 1.0);"
-		"}";
 
-/*	if(modals_.display_type != DisplayType::RGB) {
+	if(modals_.display_type != DisplayType::RGB) {
 		fragment_shader +=
 			"uniform mat3 lumaChromaToRGB;"
 			"uniform mat3 rgbToLumaChroma;";
@@ -401,6 +397,11 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 	}
 
 	fragment_shader +=
+		"void main(void) {"
+			"fragColour = vec4(vec3(composite_sample(textureCoordinate, 0)), 1.0);"
+		"}";
+
+/*	fragment_shader +=
 		"void main(void) {"
 			"vec3 fragColour3;";
 
