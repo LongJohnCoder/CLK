@@ -398,7 +398,8 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 
 	fragment_shader +=
 		"void main(void) {"
-			"fragColour = vec4(vec3(composite_sample(textureCoordinate, compositeAngle)), 1.0);"
+			"fragColour = vec4(vec3(compositeAngle), 1.0);"
+//			"fragColour = vec4(vec3(composite_sample(textureCoordinate, compositeAngle)), 1.0);"
 		"}";
 
 /*	fragment_shader +=
