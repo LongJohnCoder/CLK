@@ -311,7 +311,7 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 	// Compose a fragment shader.
 	fragment_shader +=
 		"void main(void) {"
-			"fragColour = vec4(1.0);"
+			"fragColour = vec4(textureLod(textureName, textureCoordinate, 0).rrr, 1.0);"
 		"}";
 
 /*	if(modals_.display_type != DisplayType::RGB) {
