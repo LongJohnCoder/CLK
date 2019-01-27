@@ -309,8 +309,12 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 	vertex_shader += "}";
 
 	// Compose a fragment shader.
+	fragment_shader +=
+		"void main(void) {"
+			"fragColour = vec4(1.0);"
+		"}";
 
-	if(modals_.display_type != DisplayType::RGB) {
+/*	if(modals_.display_type != DisplayType::RGB) {
 		fragment_shader +=
 			"uniform mat3 lumaChromaToRGB;"
 			"uniform mat3 rgbToLumaChroma;";
@@ -483,7 +487,7 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 
 	fragment_shader +=
 			"fragColour = vec4(fragColour3, 0.64);"
-		"}";
+		"}";*/
 
 	const auto shader = new Shader(
 		vertex_shader,
