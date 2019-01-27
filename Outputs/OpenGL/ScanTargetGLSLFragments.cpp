@@ -275,7 +275,7 @@ std::unique_ptr<Shader> ScanTarget::conversion_shader() const {
 	// For everything other than RGB, calculate the two composite outputs.
 	if(modals_.display_type != DisplayType::RGB) {
 		vertex_shader +=
-			"compositeAngle = (mix(startCompositeAngle, endCompositeAngle, lateral) / 32.0) * 3.141592654;"
+			"compositeAngle = 0.5;"//(mix(startCompositeAngle, endCompositeAngle, lateral) / 32.0) * 3.141592654;"
 			"compositeAmplitude = lineCompositeAmplitude / 255.0;"
 			"oneOverCompositeAmplitude = mix(0.0, 255.0 / lineCompositeAmplitude, step(0.01, lineCompositeAmplitude));";
 	}
